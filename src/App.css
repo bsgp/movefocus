@@ -215,6 +215,35 @@ div.input-container div.line span.btn-info {
   border: 1px solid #f0f000;
 }
 
+.active-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid gray;
+}
+
+.productInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.weight {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: flex-start;
+}
+
 @media screen and (max-device-width: 375px) {
   div.item-container {
     flex-direction: column;

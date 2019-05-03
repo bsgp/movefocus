@@ -15,6 +15,10 @@ function repeat(t) {
 
 const MATERIAL_PREFIX = "mat-";
 const QTY_PREFIX = "qty-";
+const CODEID_PREFIX = "id-";
+const LOT_PREFIX = "lot-";
+
+const label = [`오더`, `제품`, `작업량`, `원료코드`, `동종재고`];
 
 class App extends Component {
   state = {
@@ -115,6 +119,49 @@ class App extends Component {
             <p />
           </div>
           <form>
+            <div className="active-container">
+              <div className="productInfo">
+                {label.map((m, i) => {
+                  const Id = `${CODEID_PREFIX}${i}`;
+                  const lotId = `${LOT_PREFIX}${m}`;
+
+                  if (m === "제품") {
+                    return (
+                      <div key={m} className="info">
+                        <label>{m}</label>
+                        <input id={Id} disabled readOnly value="123" />
+                      </div> //Input 컴포넌트로 만들어버릴것
+                    );
+                  }
+                  if (m === "작업량") {
+                    return (
+                      <div key={m} className="info">
+                        <label>{m}</label>
+                        <input id={Id} disabled readOnly value="123" />
+                      </div>
+                    );
+                  }
+
+                  return (
+                    <div key={m} className="info">
+                      <label>{m}</label>
+                      <input id={i} name={m} onChange={this.activeChange} />
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="weight">
+                <label>무게</label>
+                <input />
+              </div>
+
+              <div className="buttonGroup">
+                <button onClick={this.qtyOnChange}>재칭량</button>
+                <button>Lot분할</button>
+                <button>라벨재발행</button>
+                <button>전체확인</button>
+              </div>
+            </div>
             <div className="inside-container">
               {in_materials.map(m => {
                 const matID = `${MATERIAL_PREFIX}${m.id}`;
