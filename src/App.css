@@ -179,6 +179,7 @@ div.input-container div.line {
 div.input-container label {
   width: 60%;
   font-size: 0.875rem;
+  text-align: left;
 }
 div.input-container label.no_timer {
   width: 100%;
@@ -220,28 +221,18 @@ div.input-container div.line span.btn-info {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
   border: 1px solid gray;
+  box-sizing: border-box;
 }
 
-.productInfo {
+.vbox {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.weight {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.buttonGroup {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: flex-start;
 }
 
 @media screen and (max-device-width: 375px) {

@@ -19,6 +19,47 @@ const CODEID_PREFIX = "id-";
 const LOT_PREFIX = "lot-";
 
 const label = [`오더`, `제품`, `작업량`, `원료코드`, `동종재고`];
+const inputs_header = [
+  {
+    id: "order",
+    label: "오더"
+  },
+  {
+    id: "product",
+    label: "제품",
+    asText: true
+  },
+  {
+    id: "outputQuantity",
+    label: "작업량",
+    asText: true
+  }
+];
+const inputs_item = [
+  {
+    id: "inputMaterial",
+    label: "원료"
+  },
+  {
+    id: "inputLot",
+    label: "Lot"
+  },
+  {
+    id: "inputQuantity",
+    label: "",
+    placeholder: "무게"
+  }
+];
+const btn_group = [
+  {
+    id: "reWeighing",
+    label: "재칭량"
+  },
+  {
+    id: "splitLot",
+    label: "Lot 분할"
+  }
+];
 
 class App extends Component {
   state = {
@@ -120,46 +161,33 @@ class App extends Component {
           </div>
           <form>
             <div className="active-container">
-              <div className="productInfo">
-                {label.map((m, i) => {
-                  const Id = `${CODEID_PREFIX}${i}`;
-                  const lotId = `${LOT_PREFIX}${m}`;
-
-                  if (m === "제품") {
-                    return (
-                      <div key={m} className="info">
-                        <label>{m}</label>
-                        <input id={Id} disabled readOnly value="123" />
-                      </div> //Input 컴포넌트로 만들어버릴것
-                    );
-                  }
-                  if (m === "작업량") {
-                    return (
-                      <div key={m} className="info">
-                        <label>{m}</label>
-                        <input id={Id} disabled readOnly value="123" />
-                      </div>
-                    );
-                  }
-
-                  return (
-                    <div key={m} className="info">
-                      <label>{m}</label>
-                      <input id={i} name={m} onChange={this.activeChange} />
-                    </div>
-                  );
-                })}
+              <div className="vbox inputs-header">
+                {inputs_header.map((d, i) => (
+                  <Input
+                    id={`${d.id}-text`}
+                    label={d.label}
+                    asText={d.asText}
+                    value={""}
+                    placeholder={d.label}
+                  />
+                ))}
               </div>
-              <div className="weight">
-                <label>무게</label>
-                <input />
+              <div className="vbox inputs-item">
+                {inputs_item.map((d, i) => (
+                  <Input
+                    id={`${d.id}-text`}
+                    label={d.label}
+                    asText={d.asText}
+                    value={""}
+                    placeholder={d.placeholder || d.label}
+                  />
+                ))}
               </div>
 
-              <div className="buttonGroup">
-                <button onClick={this.qtyOnChange}>재칭량</button>
-                <button>Lot분할</button>
-                <button>라벨재발행</button>
-                <button>전체확인</button>
+              <div className="vbox buttonGroup">
+                {btn_group.map(b => (
+                  <button key={b.id}>{b.label}</button>
+                ))}
               </div>
             </div>
             <div className="inside-container">
@@ -181,24 +209,27 @@ class App extends Component {
                     </div>
                     <div className="hbox-container">
                       <Input
-                        label={"Material"}
+                        label={"원료"}
                         run_timer={run_timer}
                         activeID={activeID}
                         id={matID}
-                        placeholder={"Scan material code"}
+                        placeholder={"원료"}
                         data_attributes={data_attributes}
                         onChange={this.matOnChange}
+                        run_timer={false}
+                        asText={true}
                       />
                       <Input
-                        label={"Weight"}
+                        label={"실수량"}
                         run_timer={run_timer}
                         activeID={activeID}
                         id={qtyID}
-                        placeholder={"Scan weight"}
+                        placeholder={"실수량"}
                         data_attributes={data_attributes}
                         onChange={this.qtyOnChange}
                         type={"number"}
                         value={m.qty}
+                        run_timer={false}
                       />
                     </div>
                   </div>
