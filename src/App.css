@@ -179,6 +179,7 @@ div.input-container div.line {
 div.input-container label {
   width: 60%;
   font-size: 0.875rem;
+  text-align: left;
 }
 div.input-container label.no_timer {
   width: 100%;
@@ -213,6 +214,25 @@ div.input-container div.line span.btn-info {
   cursor: pointer;
   box-sizing: border-box;
   border: 1px solid #f0f000;
+}
+
+.active-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  border: 1px solid gray;
+  box-sizing: border-box;
+}
+
+.vbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 @media screen and (max-device-width: 375px) {

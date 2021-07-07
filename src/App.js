@@ -15,6 +15,51 @@ function repeat(t) {
 
 const MATERIAL_PREFIX = "mat-";
 const QTY_PREFIX = "qty-";
+const CODEID_PREFIX = "id-";
+const LOT_PREFIX = "lot-";
+
+const label = [`오더`, `제품`, `작업량`, `원료코드`, `동종재고`];
+const inputs_header = [
+  {
+    id: "order",
+    label: "오더"
+  },
+  {
+    id: "product",
+    label: "제품",
+    asText: true
+  },
+  {
+    id: "outputQuantity",
+    label: "작업량",
+    asText: true
+  }
+];
+const inputs_item = [
+  {
+    id: "inputMaterial",
+    label: "원료"
+  },
+  {
+    id: "inputLot",
+    label: "Lot"
+  },
+  {
+    id: "inputQuantity",
+    label: "",
+    placeholder: "무게"
+  }
+];
+const btn_group = [
+  {
+    id: "reWeighing",
+    label: "재칭량"
+  },
+  {
+    id: "splitLot",
+    label: "Lot 분할"
+  }
+];
 
 class App extends Component {
   state = {
@@ -115,6 +160,36 @@ class App extends Component {
             <p />
           </div>
           <form>
+            <div className="active-container">
+              <div className="vbox inputs-header">
+                {inputs_header.map((d, i) => (
+                  <Input
+                    id={`${d.id}-text`}
+                    label={d.label}
+                    asText={d.asText}
+                    value={""}
+                    placeholder={d.label}
+                  />
+                ))}
+              </div>
+              <div className="vbox inputs-item">
+                {inputs_item.map((d, i) => (
+                  <Input
+                    id={`${d.id}-text`}
+                    label={d.label}
+                    asText={d.asText}
+                    value={""}
+                    placeholder={d.placeholder || d.label}
+                  />
+                ))}
+              </div>
+
+              <div className="vbox buttonGroup">
+                {btn_group.map(b => (
+                  <button key={b.id}>{b.label}</button>
+                ))}
+              </div>
+            </div>
             <div className="inside-container">
               {in_materials.map(m => {
                 const matID = `${MATERIAL_PREFIX}${m.id}`;
@@ -134,24 +209,27 @@ class App extends Component {
                     </div>
                     <div className="hbox-container">
                       <Input
-                        label={"Material"}
+                        label={"원료"}
                         run_timer={run_timer}
                         activeID={activeID}
                         id={matID}
-                        placeholder={"Scan material code"}
+                        placeholder={"원료"}
                         data_attributes={data_attributes}
                         onChange={this.matOnChange}
+                        run_timer={false}
+                        asText={true}
                       />
                       <Input
-                        label={"Weight"}
+                        label={"실수량"}
                         run_timer={run_timer}
                         activeID={activeID}
                         id={qtyID}
-                        placeholder={"Scan weight"}
+                        placeholder={"실수량"}
                         data_attributes={data_attributes}
                         onChange={this.qtyOnChange}
                         type={"number"}
                         value={m.qty}
+                        run_timer={false}
                       />
                     </div>
                   </div>
